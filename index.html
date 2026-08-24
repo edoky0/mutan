@@ -1,0 +1,487 @@
+<title>무탄 일별 판매량</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F3F6F3; --surface:#FFFFFF; --surface-2:#F9FBF9;
+  --ink:#12211C; --ink-2:#3D4F48; --muted:#6E807A; --line:#DCE4E0; --line-soft:#EAEFEC;
+  --accent:#1F6F5C; --accent-soft:#9FC8BB; --accent-ink:#155345; --on-accent:#FFFFFF;
+  --up:#1F6F5C; --down:#B4462F;
+  --shadow:0 1px 2px rgba(18,33,28,.05), 0 10px 26px -14px rgba(18,33,28,.22);
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1412; --surface:#151D1A; --surface-2:#1A2320;
+    --ink:#E8EEEA; --ink-2:#B9C6C0; --muted:#8B9A94; --line:#27322E; --line-soft:#1F2926;
+    --accent:#5FBFA3; --accent-soft:#31604F; --accent-ink:#8FD9C2; --on-accent:#0E1412;
+    --up:#5FBFA3; --down:#E4886F;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 14px 30px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1412; --surface:#151D1A; --surface-2:#1A2320;
+  --ink:#E8EEEA; --ink-2:#B9C6C0; --muted:#8B9A94; --line:#27322E; --line-soft:#1F2926;
+  --accent:#5FBFA3; --accent-soft:#31604F; --accent-ink:#8FD9C2; --on-accent:#0E1412;
+  --up:#5FBFA3; --down:#E4886F;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 14px 30px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Gothic A1","IBM Plex Sans KR",sans-serif; font-weight:800; text-wrap:balance; margin:0}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:"Gothic A1",sans-serif; font-weight:700; font-size:11px;
+  letter-spacing:.16em; color:var(--muted); margin:0;
+}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+
+/* ---------- 비밀번호 화면 ---------- */
+.gate{min-height:100svh; display:grid; place-items:center; padding:24px}
+.gate-card{
+  width:min(380px,100%); background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r); box-shadow:var(--shadow); padding:34px 30px 28px;
+  display:flex; flex-direction:column; gap:0;
+}
+.gate-card h1{font-size:27px; letter-spacing:-.02em; margin:6px 0 0}
+.gate-note{color:var(--muted); font-size:13.5px; margin:8px 0 18px}
+.field{display:flex; gap:8px}
+.field input{
+  flex:1 1 auto; min-width:0; padding:11px 13px; font:inherit; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:8px;
+}
+.field input::placeholder{color:var(--muted)}
+.field button{
+  flex:0 0 auto; padding:11px 18px; border:0; border-radius:8px; cursor:pointer;
+  background:var(--accent); color:var(--on-accent);
+  font-family:"Gothic A1",sans-serif; font-weight:700; font-size:14px;
+}
+.field button:hover{background:var(--accent-ink)}
+.field button[disabled]{opacity:.55; cursor:default}
+.gate-error{color:var(--down); font-size:13px; margin:13px 0 0}
+
+/* ---------- 본문 ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:24px 20px 60px}
+header.top{display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 20px; margin-bottom:16px}
+header.top h1{font-size:27px; letter-spacing:-.025em; margin-top:3px}
+.stamp{margin-left:auto; text-align:right; color:var(--muted); font-size:12.5px; line-height:1.5}
+
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+.panel + .panel{margin-top:14px}
+.panel-head{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; padding:16px 18px 0}
+.panel-head h2{font-size:16px; letter-spacing:-.01em}
+.panel-head .hint{color:var(--muted); font-size:12.5px; margin-right:auto}
+.panel-body{padding:14px 18px 18px}
+
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:7px; overflow:hidden; margin-left:auto}
+.seg button{
+  border:0; background:transparent; color:var(--muted); cursor:pointer;
+  font:inherit; font-size:12.5px; padding:5px 11px;
+}
+.seg button[aria-pressed="true"]{background:var(--accent); color:var(--on-accent)}
+.search{
+  padding:6px 10px; font:inherit; font-size:13px; color:var(--ink); min-width:150px;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:7px;
+}
+
+.scroller{overflow-x:auto; border-top:1px solid var(--line-soft); margin-top:12px}
+table{border-collapse:separate; border-spacing:0; width:100%; font-size:13.5px}
+th,td{padding:7px 10px; white-space:nowrap; border-bottom:1px solid var(--line-soft)}
+thead th{
+  position:sticky; top:0; z-index:3; background:var(--surface-2); color:var(--muted);
+  font-weight:600; font-size:12px; text-align:right; border-bottom:1px solid var(--line);
+}
+thead th.name{text-align:left}
+thead th.name,thead th.sum{z-index:4; background:var(--surface-2)}
+th.name,td.name{
+  position:sticky; left:0; z-index:2; background:var(--surface); text-align:left;
+  max-width:186px; min-width:186px; overflow:hidden; text-overflow:ellipsis;
+}
+th.sum,td.sum{position:sticky; left:186px; z-index:2; background:var(--surface); text-align:right; font-weight:600}
+td.name{font-weight:500; color:var(--ink)}
+td{text-align:right; color:var(--ink-2)}
+td.zero{color:var(--muted); opacity:.45}
+tbody tr:hover td{background:var(--surface-2)}
+th.we,td.we{background:var(--surface-2)}
+tfoot td{font-weight:700; color:var(--ink); border-top:1px solid var(--line); border-bottom:0; background:var(--surface)}
+.spark{display:block; margin:0 auto}
+.sortable{cursor:pointer; user-select:none}
+.sortable[aria-sort="descending"]::after{content:" \2193"; color:var(--accent)}
+.sortable[aria-sort="ascending"]::after{content:" \2191"; color:var(--accent)}
+.empty{padding:26px 12px; text-align:center; color:var(--muted); font-size:13.5px}
+
+/* ---------- 품목별 분석 ---------- */
+.lede{margin:0 0 14px; font-size:14px; color:var(--ink-2); line-height:1.65}
+.lede b{color:var(--ink); font-weight:600}
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px 22px}
+.col h3{
+  font-family:"Gothic A1",sans-serif; font-size:12px; font-weight:700; color:var(--muted);
+  letter-spacing:.04em; margin:0 0 7px; padding-bottom:6px; border-bottom:1px solid var(--line-soft);
+}
+.col ol{list-style:none; margin:0; padding:0}
+.col li{display:flex; align-items:baseline; gap:10px; padding:5px 0; font-size:13.5px}
+.col li .nm{flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.col li .dv{flex:0 0 auto; font-weight:600}
+.col li .base{flex:0 0 auto; color:var(--muted); font-size:12px}
+.dv.up{color:var(--up)} .dv.down{color:var(--down)}
+
+.notes{margin-top:16px; padding-top:12px; border-top:1px solid var(--line-soft)}
+.notes p{margin:0 0 6px; font-size:12.5px; color:var(--muted); line-height:1.65}
+.notes p:last-child{margin-bottom:0}
+.notes p::before{content:"※ "; color:var(--accent)}
+footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7}
+@media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important}}
+@media (max-width:560px){
+  body{font-size:14px}
+  .wrap{padding:18px 12px 48px}
+  th.name,td.name{max-width:124px; min-width:124px}
+  th.sum,td.sum{left:124px}
+  th,td{padding:7px 8px}
+  table{font-size:12.5px}
+  header.top{gap:4px 12px; margin-bottom:12px}
+  header.top h1{font-size:23px}
+  .stamp{flex:1 0 100%; margin-left:0; text-align:left}
+  .panel-head{padding:14px 13px 0; gap:8px}
+  .panel-head .hint{display:none}
+  .panel-body{padding:12px 13px 15px}
+  .search{flex:1 1 120px; min-width:0}
+  .seg{margin-left:0}
+  .scroller{-webkit-overflow-scrolling:touch}
+  footer.note{font-size:11.5px}
+}
+</style>
+
+<div class="gate" id="gate">
+  <form class="gate-card" id="gateForm">
+    <p class="eyebrow">무탄 · 내부 자료</p>
+    <h1>품목별 판매량</h1>
+    <p class="gate-note">비밀번호를 넣으면 표가 열립니다.</p>
+    <div class="field">
+      <input id="pw" type="password" inputmode="numeric" autocomplete="current-password" placeholder="비밀번호" aria-label="비밀번호">
+      <button id="unlock" type="submit">열기</button>
+    </div>
+    <p class="gate-error" id="gateErr" role="alert" hidden></p>
+  </form>
+</div>
+
+<main class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <p class="eyebrow">무탄 · 5개 매장 합계</p>
+      <h1>품목별 판매량</h1>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="hint">머리글을 누르면 그 날짜 기준으로 정렬됩니다</span>
+      <input class="search" id="q" type="search" placeholder="품목 찾기" aria-label="품목 찾기">
+      <div class="seg" id="range" role="group" aria-label="보는 기간">
+        <button type="button" data-days="7" aria-pressed="true">최근 7일</button>
+        <button type="button" data-days="0" aria-pressed="false">전체</button>
+      </div>
+    </div>
+    <div class="scroller"><table id="tbl"></table></div>
+    <div class="empty" id="empty" hidden>찾는 품목이 없습니다.</div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>품목별 분석</h2></div>
+    <div class="panel-body" id="analysis"></div>
+  </section>
+
+  <footer class="note" id="foot"></footer>
+</main>
+
+<script>
+/* 아티팩트가 <head>를 대신 만들기 때문에 파일 안에 meta를 쓸 수 없다.
+   폰에서 데스크톱 폭(980px)으로 그려지는 것을 막고, '홈 화면에 추가'했을 때
+   아이콘·이름이 제대로 잡히게 실행 시점에 붙인다. (2026-08-24) */
+(function(){
+  function head(tag, attrs){
+    for(const k in attrs){
+      const sel = tag + '[' + k + '="' + attrs[k] + '"]';
+      if(k !== 'content' && document.head.querySelector(sel)) return;
+    }
+    const el = document.createElement(tag);
+    for(const k in attrs) el.setAttribute(k, attrs[k]);
+    document.head.appendChild(el);
+  }
+  let vp = document.head.querySelector('meta[name="viewport"]');
+  if(!vp){ vp = document.createElement("meta"); vp.name = "viewport"; document.head.appendChild(vp); }
+  vp.setAttribute("content", "width=device-width, initial-scale=1, viewport-fit=cover");
+
+  head("meta", {name:"apple-mobile-web-app-capable", content:"yes"});
+  head("meta", {name:"mobile-web-app-capable", content:"yes"});
+  head("meta", {name:"apple-mobile-web-app-title", content:"무탄 판매량"});
+  head("meta", {name:"apple-mobile-web-app-status-bar-style", content:"black-translucent"});
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  head("meta", {name:"theme-color", content: dark ? "#0E1412" : "#F3F6F3"});
+
+  // 홈 화면 아이콘. iOS는 SVG를 안 받아서 캔버스로 PNG를 만들어 붙인다.
+  function icon(size){
+    const c = document.createElement("canvas");
+    c.width = c.height = size;
+    const g = c.getContext("2d");
+    g.fillStyle = "#1F6F5C";
+    g.fillRect(0, 0, size, size);
+    g.fillStyle = "#FFFFFF";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.font = "700 " + Math.round(size * 0.38) + 'px "Gothic A1", sans-serif';
+    g.fillText("무탄", size / 2, size * 0.42);
+    g.font = "500 " + Math.round(size * 0.17) + 'px "IBM Plex Sans KR", sans-serif';
+    g.fillText("판매량", size / 2, size * 0.74);
+    return c.toDataURL("image/png");
+  }
+  try{
+    const i180 = icon(180), i512 = icon(512);
+    head("link", {rel:"apple-touch-icon", href:i180});
+    head("link", {rel:"icon", type:"image/png", href:i180});
+    const manifest = {
+      name:"무탄 품목별 판매량", short_name:"무탄 판매량",
+      display:"standalone", start_url:location.href, scope:location.href,
+      background_color: dark ? "#0E1412" : "#F3F6F3",
+      theme_color:"#1F6F5C",
+      icons:[{src:i180, sizes:"180x180", type:"image/png"},
+             {src:i512, sizes:"512x512", type:"image/png"}]
+    };
+    head("link", {rel:"manifest",
+      href:"data:application/manifest+json," + encodeURIComponent(JSON.stringify(manifest))});
+  }catch(e){}
+})();
+
+const BLOB = {"v":1,"iter":250000,"salt":"RFlv1K/JmENyQ8L/Cy5j4g==","iv":"nhu9d5e6YExNs4K1","ct":"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"};
+
+/* ---------- 잠금 해제 ---------- */
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const KEY_CACHE = "mutan-sales-pw";
+
+async function decrypt(pw){
+  const enc = new TextEncoder();
+  const base = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt:b64(BLOB.salt), iterations:BLOB.iter, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(BLOB.iv)}, key, b64(BLOB.ct));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+
+const gate = document.getElementById("gate");
+const gateForm = document.getElementById("gateForm");
+const pwInput = document.getElementById("pw");
+const unlockBtn = document.getElementById("unlock");
+const gateErr = document.getElementById("gateErr");
+
+function fail(msg){
+  gateErr.textContent = msg;
+  gateErr.hidden = false;
+  unlockBtn.disabled = false;
+  unlockBtn.textContent = "열기";
+  pwInput.select();
+}
+
+async function tryOpen(pw, remember){
+  unlockBtn.disabled = true;
+  unlockBtn.textContent = "여는 중";
+  gateErr.hidden = true;
+  let data;
+  try{ data = await decrypt(pw); }
+  catch(e){ fail("비밀번호가 맞지 않습니다. 다시 넣어 주세요."); return false; }
+  if(remember){ try{ sessionStorage.setItem(KEY_CACHE, pw); }catch(e){} }
+  gate.remove();
+  document.getElementById("app").hidden = false;
+  render(data);
+  return true;
+}
+
+gateForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const pw = pwInput.value;
+  if(!pw){ fail("비밀번호를 넣어 주세요."); return; }
+  tryOpen(pw, true);
+});
+
+(function(){
+  let saved = null;
+  try{ saved = sessionStorage.getItem(KEY_CACHE); }catch(e){}
+  if(saved){
+    tryOpen(saved, false).then(ok => {
+      if(!ok){
+        try{ sessionStorage.removeItem(KEY_CACHE); }catch(e){}
+        gateErr.hidden = true;
+        pwInput.focus();
+      }
+    });
+  } else {
+    pwInput.focus();
+  }
+})();
+
+/* ---------- 그리기 ---------- */
+const nf = n => n.toLocaleString("ko-KR");
+const WD = ["월","화","수","목","금","토","일"];
+const dow = d => (new Date(d + "T00:00:00").getDay() + 6) % 7;
+const isWeekend = d => dow(d) >= 5;
+const wdOf = d => WD[dow(d)];
+const mmdd = d => d.slice(5).replace("-", "/");
+const round1 = n => n.toFixed(1);   // "+4"가 아니라 "+4.0" - 소수 자리가 붙어야 세로로 읽힌다
+
+let DATA = null, days = 7, sortKey = "sum", sortDir = -1, query = "";
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+}
+
+function render(data){
+  DATA = data;
+  const dates = data.dates, last = dates.length - 1;
+  document.getElementById("stamp").innerHTML =
+    "기간 " + dates[0] + " ~ " + dates[last] + " · " + dates.length + "일<br>"
+    + escapeHtml(data.generated) + " 기준";
+
+  document.getElementById("foot").innerHTML =
+    "무탄 5개 매장(압구정 · 코엑스 · 광화문 · 여의도 · 파주스타필드) 합계입니다. 숫자는 매출건수 기준이고, "
+    + "매일 아침 자동 수집이 끝난 뒤 이 페이지가 다시 만들어집니다. 원본은 구글시트 ‘무탄 일별 판매량’입니다.";
+
+  buildTable();
+  buildAnalysis();
+}
+
+function sparkline(vals){
+  const w = 62, h = 18;
+  if(vals.length < 2) return "";
+  const max = Math.max.apply(null, vals.concat([1]));
+  const pts = vals.map((v, i) => ((i/(vals.length-1))*(w-2)+1) + "," + (h-1-(v/max)*(h-3))).join(" ");
+  const lx = w - 1, ly = h - 1 - (vals[vals.length-1]/max)*(h-3);
+  return '<svg class="spark" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" aria-hidden="true">'
+       + '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>'
+       + '<circle cx="' + lx + '" cy="' + ly + '" r="2.2" fill="var(--accent)"/></svg>';
+}
+
+function buildTable(){
+  const from = days > 0 ? Math.max(0, DATA.dates.length - days) : 0;
+  const dates = DATA.dates.slice(from);
+  const rows = DATA.items
+    .map(it => { const v = it.v.slice(from); return {n: it.n, v: v, sum: v.reduce((a,b) => a + b, 0)}; })
+    .filter(r => !query || r.n.toLowerCase().indexOf(query) >= 0);
+
+  rows.sort((a,b) => {
+    if(sortKey === "name") return a.n.localeCompare(b.n, "ko") * -sortDir;
+    if(sortKey === "sum") return (a.sum - b.sum) * sortDir;
+    return (a.v[sortKey] - b.v[sortKey]) * sortDir || (a.sum - b.sum) * sortDir;
+  });
+
+  const colTotals = dates.map((_, i) => rows.reduce((s, r) => s + r.v[i], 0));
+  const grand = colTotals.reduce((a,b) => a + b, 0);
+  const aria = k => sortKey === k ? (sortDir < 0 ? "descending" : "ascending") : "none";
+
+  let h = '<thead><tr><th scope="col" class="name sortable" data-k="name" aria-sort="' + aria("name") + '">품목</th>'
+        + '<th scope="col" class="sum sortable" data-k="sum" aria-sort="' + aria("sum") + '">합계</th>'
+        + '<th scope="col">추이</th>';
+  dates.forEach((d, i) => {
+    h += '<th scope="col" class="sortable' + (isWeekend(d) ? " we" : "") + '" data-k="' + i + '" aria-sort="'
+       + aria(i) + '">' + mmdd(d) + "<br>" + wdOf(d) + "</th>";
+  });
+  h += "</tr></thead><tbody>";
+
+  rows.forEach(r => {
+    h += '<tr><td class="name" title="' + escapeHtml(r.n) + '">' + escapeHtml(r.n) + "</td>"
+       + '<td class="sum num">' + nf(r.sum) + "</td><td>" + sparkline(r.v) + "</td>";
+    r.v.forEach((v, i) => {
+      h += '<td class="num' + (v ? "" : " zero") + (isWeekend(dates[i]) ? " we" : "") + '">' + (v ? nf(v) : "·") + "</td>";
+    });
+    h += "</tr>";
+  });
+  h += '</tbody><tfoot><tr><td class="name">합계</td><td class="sum num">' + nf(grand) + "</td><td></td>"
+     + colTotals.map((t, i) => '<td class="num' + (isWeekend(dates[i]) ? " we" : "") + '">' + nf(t) + "</td>").join("")
+     + "</tr></tfoot>";
+
+  document.getElementById("tbl").innerHTML = rows.length ? h : "";
+  document.getElementById("empty").hidden = rows.length > 0;
+
+  document.querySelectorAll("#tbl .sortable").forEach(th => {
+    th.addEventListener("click", () => {
+      const raw = th.dataset.k;
+      const k = (raw === "name" || raw === "sum") ? raw : +raw;
+      if(k === sortKey) sortDir *= -1; else { sortKey = k; sortDir = -1; }
+      buildTable();
+    });
+  });
+}
+
+/* 최근 7일 하루 평균을 그 **직전 7일**과 견준다.
+
+   '그 앞 전부'와 비교하면 날짜가 쌓일수록 기준 구간이 길어져서, 몇 달 전 하루
+   평균과 이번 주를 견주게 된다. 7일 대 7일로 고정하면 기준이 늘 같은 길이이고,
+   한 번 생긴 왜곡도 2주가 지나면 저절로 빠져나간다.
+   건수가 아니라 하루 평균으로 보는 것은 두 구간의 날 수가 다를 수 있어서다. */
+function buildAnalysis(){
+  const el = document.getElementById("analysis");
+  const dates = DATA.dates, n = dates.length;
+  const recN = Math.min(7, n - 1);
+  if(n < 4 || recN < 2){ el.innerHTML = '<p class="lede">비교할 날짜가 아직 모자랍니다.</p>'; return; }
+  const cut = n - recN;
+  const prevN = Math.min(7, cut), prevFrom = cut - prevN;
+
+  const stats = DATA.items.map(it => {
+    const total = it.v.reduce((a,b) => a + b, 0);
+    const rec = it.v.slice(cut).reduce((a,b) => a + b, 0) / recN;
+    const prev = it.v.slice(prevFrom, cut).reduce((a,b) => a + b, 0) / prevN;
+    return {n: it.n, total: total, rec: rec, prev: prev, d: rec - prev};
+  });
+
+  const grand = stats.reduce((s, x) => s + x.total, 0);
+  const byTotal = stats.slice().sort((a,b) => b.total - a.total);
+  const top5 = byTotal.slice(0, 5);
+  const share = Math.round(top5.reduce((s, x) => s + x.total, 0) / grand * 100);
+
+  // 하루 한두 개 팔리는 품목이 증감률 상위를 차지하지 않게 잔챙이는 뺀다
+  const meaningful = stats.filter(x => x.total >= 20);
+  const byDelta = meaningful.slice().sort((a,b) => b.d - a.d);
+  const ups = byDelta.filter(x => x.d > 0.4).slice(0, 3);
+  const downs = byDelta.filter(x => x.d < -0.4).reverse().slice(0, 3);
+
+  const lines = (arr, cls) => arr.length
+    ? '<ol>' + arr.map(x =>
+        '<li><span class="nm">' + escapeHtml(x.n) + '</span>'
+        + '<span class="dv ' + cls + ' num">' + (x.d > 0 ? "+" : "−") + round1(Math.abs(x.d)) + '</span>'
+        + '<span class="base num">' + round1(x.prev) + " → " + round1(x.rec) + '</span></li>').join("") + '</ol>'
+    : '<p class="lede" style="margin:0">눈에 띄게 움직인 품목이 없습니다.</p>';
+
+  el.innerHTML =
+    '<p class="lede">품목 <b class="num">' + nf(stats.length) + '</b>개 중 많이 나가는 <b>5개</b>가 전체의 '
+      + '<b class="num">' + share + '%</b>를 차지합니다 — '
+      + top5.map(x => escapeHtml(x.n) + ' <span class="num">' + nf(x.total) + '</span>').join(" · ") + '.<br>'
+      + '아래는 최근 <b>' + recN + '일</b>(' + mmdd(dates[cut]) + '~' + mmdd(dates[n-1]) + ') 하루 평균을 '
+      + '직전 <b>' + prevN + '일</b>(' + mmdd(dates[prevFrom]) + '~' + mmdd(dates[cut-1]) + ')과 견준 것입니다. '
+      + '숫자는 하루 몇 개씩 달라졌는지입니다.</p>'
+    + '<div class="cols">'
+    + '<div class="col"><h3>늘어난 품목</h3>' + lines(ups, "up") + '</div>'
+    + '<div class="col"><h3>줄어든 품목</h3>' + lines(downs, "down") + '</div>'
+    + '</div>'
+    + ((DATA.notes || []).length
+        ? '<div class="notes">' + DATA.notes.map(t => '<p>' + escapeHtml(t) + '</p>').join("") + '</div>'
+        : "");
+}
+
+document.getElementById("q").addEventListener("input", e => {
+  query = e.target.value.trim().toLowerCase();
+  buildTable();
+});
+document.getElementById("range").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b) return;
+  days = +b.dataset.days;
+  document.querySelectorAll("#range button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  if(typeof sortKey === "number"){ sortKey = "sum"; sortDir = -1; }
+  buildTable();
+});
+</script>
