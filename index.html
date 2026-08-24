@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 </head>
 <body>
-<title>무탄 일별 판매량</title>
+<title>메뉴판매량[일별]</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
@@ -123,7 +123,7 @@ tfoot td{font-weight:700; color:var(--ink); border-top:1px solid var(--line); bo
 .sortable[aria-sort="ascending"]::after{content:" \2191"; color:var(--accent)}
 .empty{padding:26px 12px; text-align:center; color:var(--muted); font-size:13.5px}
 
-/* ---------- 품목별 분석 ---------- */
+/* ---------- 메뉴별 분석 ---------- */
 .lede{margin:0 0 4px; font-size:14px; color:var(--ink-2); line-height:1.6}
 .lede b{color:var(--ink); font-weight:600}
 .cap{margin:0 0 14px; font-size:12px; color:var(--muted)}
@@ -168,7 +168,7 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
 <div class="gate" id="gate">
   <form class="gate-card" id="gateForm">
     <p class="eyebrow">무탄 · 내부 자료</p>
-    <h1>품목별 판매량</h1>
+    <h1>메뉴판매량[일별]</h1>
     <p class="gate-note">비밀번호를 넣으면 표가 열립니다.</p>
     <div class="field">
       <input id="pw" type="password" inputmode="numeric" autocomplete="current-password" placeholder="비밀번호" aria-label="비밀번호">
@@ -182,7 +182,7 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
   <header class="top">
     <div>
       <p class="eyebrow">무탄 · 5개 매장 합계</p>
-      <h1>품목별 판매량</h1>
+      <h1>메뉴판매량[일별]</h1>
     </div>
     <div class="stamp" id="stamp"></div>
   </header>
@@ -190,18 +190,18 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
   <section class="panel">
     <div class="panel-head">
       <span class="hint">머리글을 누르면 그 날짜 기준으로 정렬됩니다</span>
-      <input class="search" id="q" type="search" placeholder="품목 찾기" aria-label="품목 찾기">
+      <input class="search" id="q" type="search" placeholder="메뉴 찾기" aria-label="메뉴 찾기">
       <div class="seg" id="range" role="group" aria-label="보는 기간">
         <button type="button" data-days="7" aria-pressed="true">최근 7일</button>
         <button type="button" data-days="0" aria-pressed="false">전체</button>
       </div>
     </div>
     <div class="scroller"><table id="tbl"></table></div>
-    <div class="empty" id="empty" hidden>찾는 품목이 없습니다.</div>
+    <div class="empty" id="empty" hidden>찾는 메뉴가 없습니다.</div>
   </section>
 
   <section class="panel">
-    <div class="panel-head"><h2>품목별 분석</h2></div>
+    <div class="panel-head"><h2>메뉴별 분석</h2></div>
     <div class="panel-body" id="analysis"></div>
   </section>
 
@@ -228,7 +228,7 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
 
   head("meta", {name:"apple-mobile-web-app-capable", content:"yes"});
   head("meta", {name:"mobile-web-app-capable", content:"yes"});
-  head("meta", {name:"apple-mobile-web-app-title", content:"무탄 판매량"});
+  head("meta", {name:"apple-mobile-web-app-title", content:"메뉴판매량"});
   head("meta", {name:"apple-mobile-web-app-status-bar-style", content:"black-translucent"});
   const dark = matchMedia("(prefers-color-scheme: dark)").matches;
   head("meta", {name:"theme-color", content: dark ? "#0E1412" : "#F3F6F3"});
@@ -254,7 +254,7 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
     head("link", {rel:"apple-touch-icon", href:i180});
     head("link", {rel:"icon", type:"image/png", href:i180});
     const manifest = {
-      name:"무탄 품목별 판매량", short_name:"무탄 판매량",
+      name:"메뉴판매량[일별]", short_name:"메뉴판매량",
       display:"standalone", start_url:location.href, scope:location.href,
       background_color: dark ? "#0E1412" : "#F3F6F3",
       theme_color:"#1F6F5C",
@@ -266,7 +266,7 @@ footer.note{margin-top:20px; color:var(--muted); font-size:12px; line-height:1.7
   }catch(e){}
 })();
 
-const BLOB = {"v":1,"iter":250000,"salt":"bA2rZowBMHj2ORfxptQeOw==","iv":"3oI4yqgbR6H4PDJH","ct":"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"};
+const BLOB = {"v":1,"iter":250000,"salt":"n59JuNAIEbTUPRIZZCX0Qw==","iv":"lRZfT1YIutxtUOxZ","ct":"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"};
 
 /* ---------- 잠금 해제 ---------- */
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -391,7 +391,7 @@ function buildTable(){
   const grand = colTotals.reduce((a,b) => a + b, 0);
   const aria = k => sortKey === k ? (sortDir < 0 ? "descending" : "ascending") : "none";
 
-  let h = '<thead><tr><th scope="col" class="name sortable" data-k="name" aria-sort="' + aria("name") + '">품목</th>'
+  let h = '<thead><tr><th scope="col" class="name sortable" data-k="name" aria-sort="' + aria("name") + '">메뉴</th>'
         + '<th scope="col" class="sum sortable" data-k="sum" aria-sort="' + aria("sum") + '">합계</th>'
         + '<th scope="col">추이</th>';
   dates.forEach((d, i) => {
@@ -451,7 +451,7 @@ function buildAnalysis(){
   const top5 = byTotal.slice(0, 5);
   const share = Math.round(top5.reduce((s, x) => s + x.total, 0) / grand * 100);
 
-  // 하루 한두 개 팔리는 품목이 증감률 상위를 차지하지 않게 잔챙이는 뺀다
+  // 하루 한두 개 팔리는 메뉴가 증감률 상위를 차지하지 않게 잔챙이는 뺀다
   const meaningful = stats.filter(x => x.total >= 20);
   const byDelta = meaningful.slice().sort((a,b) => b.d - a.d);
   const ups = byDelta.filter(x => x.d > 0.4).slice(0, 3);
@@ -465,13 +465,13 @@ function buildAnalysis(){
     : '<p class="cap" style="margin:0">없음</p>';
 
   el.innerHTML =
-    '<p class="lede"><b>상위 5개가 전체의 <span class="num">' + share + '%</span></b> — '
+    '<p class="lede"><b>잘 나가는 5개가 전체의 <span class="num">' + share + '%</span></b> — '
       + top5.map(x => escapeHtml(x.n) + ' <span class="num">' + nf(x.total) + '</span>').join(" · ") + '</p>'
-    + '<p class="cap">최근 ' + recN + '일(' + mmdd(dates[cut]) + '~' + mmdd(dates[n-1]) + ') vs '
-      + '직전 ' + prevN + '일(' + mmdd(dates[prevFrom]) + '~' + mmdd(dates[cut-1]) + ') · 하루 평균</p>'
+    + '<p class="cap">최근 ' + recN + '일(' + mmdd(dates[cut]) + '~' + mmdd(dates[n-1]) + ')과 '
+      + '그 앞 ' + prevN + '일(' + mmdd(dates[prevFrom]) + '~' + mmdd(dates[cut-1]) + ') 비교 · 하루 평균</p>'
     + '<div class="cols">'
-    + '<div class="col"><h3>늘어남</h3>' + lines(ups, "up") + '</div>'
-    + '<div class="col"><h3>줄어듦</h3>' + lines(downs, "down") + '</div>'
+    + '<div class="col"><h3>더 팔림</h3>' + lines(ups, "up") + '</div>'
+    + '<div class="col"><h3>덜 팔림</h3>' + lines(downs, "down") + '</div>'
     + '</div>'
     + ((DATA.notes || []).length
         ? '<div class="notes">' + DATA.notes.map(t => '<p>' + escapeHtml(t) + '</p>').join("") + '</div>'
