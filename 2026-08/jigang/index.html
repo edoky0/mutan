@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>지강 8월 판매량</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style>
+</head>
+<body>
+<style>
+:root{
+  --paper:#FAF8F3; --ink:#1B1A15; --soft:#6E695C; --faint:#96907F;
+  --rule:#E5E0D3; --hair:#EFEBE0;
+  --jade:#2F6F5E; --brick:#A6412F; --gold:#8A6B22;
+  --c1:#2F6F5E; --c2:#8A6B22; --c3:#A6412F; --c4:#3F6B84; --c5:#6B4A63;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141310; --ink:#EDE9DD; --soft:#A9A292; --faint:#7C7666;
+    --rule:#2E2C24; --hair:#26241E;
+    --jade:#79C4AC; --brick:#E08A76; --gold:#D3AC57;
+    --c1:#79C4AC; --c2:#D3AC57; --c3:#E08A76; --c4:#8FB9D4; --c5:#C09ABA;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141310; --ink:#EDE9DD; --soft:#A9A292; --faint:#7C7666;
+  --rule:#2E2C24; --hair:#26241E;
+  --jade:#79C4AC; --brick:#E08A76; --gold:#D3AC57;
+  --c1:#79C4AC; --c2:#D3AC57; --c3:#E08A76; --c4:#8FB9D4; --c5:#C09ABA;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+  font-size:15px; line-height:1.6; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:34px 20px 72px}
+
+header{border-bottom:2px solid var(--ink); padding-bottom:14px}
+.eyebrow{font-size:11px; letter-spacing:.16em; color:var(--jade);
+  font-weight:600; margin:0 0 6px}
+h1{
+  font-family:"Gowun Batang",serif; font-weight:700;
+  font-size:clamp(28px,6vw,40px); line-height:1.15; margin:0;
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.sub{color:var(--soft); font-size:13px; margin:8px 0 0}
+
+.totals{
+  display:flex; flex-wrap:wrap; gap:4px 26px;
+  border-bottom:1px solid var(--rule); padding:14px 0; margin:0;
+}
+.totals div{display:flex; align-items:baseline; gap:7px}
+.totals dt{font-size:12px; color:var(--soft); margin:0}
+.totals dd{margin:0; font-family:"IBM Plex Mono",monospace; font-weight:500;
+  font-size:16px; font-variant-numeric:tabular-nums}
+.totals dd i{font-style:normal; font-size:11px; color:var(--faint); margin-left:2px}
+.totals .all dd{color:var(--jade)}
+
+section{margin-top:40px}
+.sechead{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+h2{font-family:"Gowun Batang",serif; font-weight:700; font-size:21px;
+  margin:0; letter-spacing:-.01em}
+.note{font-size:12px; color:var(--faint); margin:6px 0 0}
+.count{font-size:12px; color:var(--soft);
+  font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+
+.tablewrap{overflow-x:auto}
+table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+th{
+  font-size:11px; font-weight:600; color:var(--soft); text-align:left;
+  letter-spacing:.06em; padding:0 6px 6px; border-bottom:1.5px solid var(--ink);
+  white-space:nowrap;
+}
+td{padding:6px; border-bottom:1px solid var(--hair); vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+th.n,td.n,th.r,td.r{text-align:right}
+td.r{width:24px; padding-right:1px}
+.rk{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--faint)}
+tbody tr:nth-child(-n+2) .rk{color:var(--soft)}
+td.nm{font-size:13.5px; line-height:1.35; word-break:keep-all}
+td.n{font-family:"IBM Plex Mono",monospace; font-size:13px; white-space:nowrap}
+
+.grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:8px 30px; margin-top:16px}
+.storeblock{padding-top:14px; border-top:1px solid var(--rule)}
+.bh{display:flex; align-items:baseline; justify-content:space-between;
+  gap:10px; margin-bottom:9px}
+.bh h3{margin:0; font-size:16px; font-weight:600;
+  font-family:"Gowun Batang",serif}
+.btot{font-family:"IBM Plex Mono",monospace; font-size:15px;
+  font-variant-numeric:tabular-nums}
+.btot i{font-style:normal; font-size:10px; color:var(--faint); margin-left:3px}
+
+.catblock{display:flex; flex-direction:column; align-items:stretch}
+.donut{width:100%; max-width:190px; height:auto; align-self:center;
+  margin:2px 0 12px}
+.donut .seg{fill:none; stroke-width:23}
+.donut .pct{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  fill:var(--paper); text-anchor:middle;
+}
+.donut .ctr{
+  font-family:"IBM Plex Mono",monospace; font-size:20px; font-weight:500;
+  fill:var(--ink); text-anchor:middle;
+}
+.donut .ctrs{font-size:10px; fill:var(--faint); text-anchor:middle;
+  letter-spacing:.08em}
+.clist{list-style:none; margin:0; padding:0; display:flex;
+  flex-direction:column; gap:4px}
+.clist li{display:flex; align-items:baseline; gap:7px; font-size:13px}
+.clist .cn{flex:1; min-width:0; color:var(--soft)}
+.clist b{font-family:"IBM Plex Mono",monospace; font-weight:500;
+  font-variant-numeric:tabular-nums}
+.clist em{font-style:normal; font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px; color:var(--faint); width:52px; text-align:right;
+  font-variant-numeric:tabular-nums}
+.dot{flex:none; width:9px; height:9px; border-radius:2px;
+  display:inline-block; margin-right:0; vertical-align:1px}
+.dot.c1{background:var(--c1)} .dot.c2{background:var(--c2)}
+.dot.c3{background:var(--c3)} .dot.c4{background:var(--c4)}
+.dot.c5{background:var(--c5)}
+td.dim{color:var(--faint)}
+
+.matrix{margin-top:12px}
+.matrix td.off{color:var(--faint); opacity:.5}
+.matrix td.sum{color:var(--soft)}
+.matrix tfoot td{
+  border-top:1.5px solid var(--ink); border-bottom:none;
+  font-weight:600; padding-top:8px;
+}
+.matrix tfoot td.n{font-family:"IBM Plex Mono",monospace}
+
+footer{
+  margin-top:52px; padding-top:16px; border-top:1px solid var(--rule);
+  font-size:12px; color:var(--faint); line-height:1.8;
+}
+footer code{font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+  color:var(--soft); word-break:break-all}
+
+@media (max-width:520px){
+  .wrap{padding:26px 15px 56px}
+  td.nm{font-size:13px}
+  .totals{gap:4px 18px}
+  .sechead{flex-wrap:wrap; gap:2px 10px}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">2026년 8월 · 지강한식당 3개 매장</p>
+    <h1>지강 8월 판매량</h1>
+    <p class="sub">세트로 팔린 것을 인분으로 풀어서, 실제 인분수로 셌습니다.</p>
+  </header>
+
+  <dl class="totals">
+    <div><dt>압구정</dt><dd>7,274<i>인분수</i></dd></div>
+    <div><dt>잠실</dt><dd>5,860<i>인분수</i></dd></div>
+    <div><dt>하남</dt><dd>5,651<i>인분수</i></dd></div>
+    <div class="all"><dt>합계</dt><dd>18,785<i>인분수</i></dd></div>
+  </dl>
+
+  <section>
+    <div class="sechead">
+      <h2>매장별</h2>
+      <span class="count">18,785건</span>
+    </div>
+    <div class="grid3">
+<div class="storeblock"><div class="bh"><h3>압구정</h3><span class="btot">7,274<i>건</i></span></div><div class="tablewrap"><table><thead><tr><th class="r">&nbsp;</th><th>메뉴</th><th class="n">건</th></tr></thead><tbody><tr><td class="r"><span class="rk">1</span></td><td class="nm">차돌낙곱새</td><td class="n">2,027</td></tr>
+<tr><td class="r"><span class="rk">2</span></td><td class="nm">낙곱새</td><td class="n">1,650</td></tr>
+<tr><td class="r"><span class="rk">3</span></td><td class="nm">낙지비빔밥</td><td class="n">786</td></tr>
+<tr><td class="r"><span class="rk">4</span></td><td class="nm">철판치즈차돌낙지볶음</td><td class="n">669</td></tr>
+<tr><td class="r"><span class="rk">5</span></td><td class="nm">철판치즈낙지볶음</td><td class="n">422</td></tr>
+<tr><td class="r"><span class="rk">6</span></td><td class="nm">육회비빔밥</td><td class="n">371</td></tr>
+<tr><td class="r"><span class="rk">7</span></td><td class="nm">낙차새</td><td class="n">349</td></tr>
+<tr><td class="r"><span class="rk">8</span></td><td class="nm">철판낙지볶음</td><td class="n">342</td></tr>
+<tr><td class="r"><span class="rk">9</span></td><td class="nm">한우육회</td><td class="n">262</td></tr>
+<tr><td class="r"><span class="rk">10</span></td><td class="nm">철판차돌낙지볶음</td><td class="n">202</td></tr>
+<tr><td class="r"><span class="rk">11</span></td><td class="nm">오곱새</td><td class="n">194</td></tr></tbody></table></div></div>
+<div class="storeblock"><div class="bh"><h3>잠실</h3><span class="btot">5,860<i>건</i></span></div><div class="tablewrap"><table><thead><tr><th class="r">&nbsp;</th><th>메뉴</th><th class="n">건</th></tr></thead><tbody><tr><td class="r"><span class="rk">1</span></td><td class="nm">치즈닭갈비</td><td class="n">1,883</td></tr>
+<tr><td class="r"><span class="rk">2</span></td><td class="nm">투움바치즈닭갈비</td><td class="n">1,347</td></tr>
+<tr><td class="r"><span class="rk">3</span></td><td class="nm">차돌낙곱새</td><td class="n">490</td></tr>
+<tr><td class="r"><span class="rk">4</span></td><td class="nm">낙곱새</td><td class="n">468</td></tr>
+<tr><td class="r"><span class="rk">5</span></td><td class="nm">낙지볶음한상</td><td class="n">441</td></tr>
+<tr><td class="r"><span class="rk">6</span></td><td class="nm">치즈낙지닭갈비</td><td class="n">401</td></tr>
+<tr><td class="r"><span class="rk">7</span></td><td class="nm">투움바치즈낙지닭갈비</td><td class="n">394</td></tr>
+<tr><td class="r"><span class="rk">8</span></td><td class="nm">철판낙지볶음</td><td class="n">128</td></tr>
+<tr><td class="r"><span class="rk">9</span></td><td class="nm">낙차새</td><td class="n">112</td></tr>
+<tr><td class="r"><span class="rk">10</span></td><td class="nm">철판차돌낙지볶음</td><td class="n">108</td></tr>
+<tr><td class="r"><span class="rk">11</span></td><td class="nm">철판치즈차돌낙지볶음</td><td class="n">55</td></tr>
+<tr><td class="r"><span class="rk">12</span></td><td class="nm">철판치즈낙지볶음</td><td class="n">33</td></tr></tbody></table></div></div>
+<div class="storeblock"><div class="bh"><h3>하남</h3><span class="btot">5,651<i>건</i></span></div><div class="tablewrap"><table><thead><tr><th class="r">&nbsp;</th><th>메뉴</th><th class="n">건</th></tr></thead><tbody><tr><td class="r"><span class="rk">1</span></td><td class="nm">치즈닭갈비</td><td class="n">2,359</td></tr>
+<tr><td class="r"><span class="rk">2</span></td><td class="nm">투움바치즈닭갈비</td><td class="n">1,688</td></tr>
+<tr><td class="r"><span class="rk">3</span></td><td class="nm">치즈낙지닭갈비</td><td class="n">711</td></tr>
+<tr><td class="r"><span class="rk">4</span></td><td class="nm">투움바치즈낙지닭갈비</td><td class="n">660</td></tr>
+<tr><td class="r"><span class="rk">5</span></td><td class="nm">철판낙지볶음</td><td class="n">96</td></tr>
+<tr><td class="r"><span class="rk">6</span></td><td class="nm">철판치즈낙지볶음</td><td class="n">73</td></tr>
+<tr><td class="r"><span class="rk">7</span></td><td class="nm">철판차돌낙지볶음</td><td class="n">34</td></tr>
+<tr><td class="r"><span class="rk">8</span></td><td class="nm">철판치즈차돌낙지볶음</td><td class="n">30</td></tr></tbody></table></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>카테고리별 비율</h2>
+      <span class="count">18,785건</span>
+    </div>
+    <p class="note">비율은 그 매장 안에서의 몫입니다. 도넛에는 8%가 넘는 것만 적었습니다.</p>
+    <div class="grid3">
+<div class="storeblock catblock"><div class="bh"><h3>압구정</h3><span class="btot">7,274<i>건</i></span></div><svg class="donut" viewBox="0 0 160 160" role="img" aria-label="카테고리별 비율"><g transform="rotate(-90 80 80)"><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c2)" stroke-dasharray="200.101 164.324" stroke-dashoffset="-0.000"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c3)" stroke-dasharray="80.313 284.112" stroke-dashoffset="-201.701"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c4)" stroke-dasharray="56.365 308.059" stroke-dashoffset="-283.614"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c5)" stroke-dasharray="21.245 343.179" stroke-dashoffset="-341.579"></circle></g><text class="pct" x="137.18" y="93.20">55%</text><text class="pct" x="29.92" y="112.75">22%</text><text class="pct" x="34.80" y="47.16">16%</text><text class="ctr" x="80" y="78">7,274</text><text class="ctrs" x="80" y="93">건</text></svg><ul class="clist"><li><span class="dot c2"></span><span class="cn">낙곱새</span><b>55.3%</b><em>4,026건</em></li>
+<li><span class="dot c3"></span><span class="cn">볶음류</span><b>22.5%</b><em>1,635건</em></li>
+<li><span class="dot c4"></span><span class="cn">비빔밥</span><b>15.9%</b><em>1,157건</em></li>
+<li><span class="dot c5"></span><span class="cn">기타</span><b>6.3%</b><em>456건</em></li></ul></div>
+<div class="storeblock catblock"><div class="bh"><h3>잠실</h3><span class="btot">5,860<i>건</i></span></div><svg class="donut" viewBox="0 0 160 160" role="img" aria-label="카테고리별 비율"><g transform="rotate(-90 80 80)"><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c1)" stroke-dasharray="248.709 115.716" stroke-dashoffset="-0.000"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c2)" stroke-dasharray="64.942 299.483" stroke-dashoffset="-250.309"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c3)" stroke-dasharray="18.549 345.876" stroke-dashoffset="-316.851"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c5)" stroke-dasharray="25.825 338.600" stroke-dashoffset="-337.000"></circle></g><text class="pct" x="128.29" y="115.63">69%</text><text class="pct" x="22.91" y="73.29">18%</text><text class="ctr" x="80" y="78">5,860</text><text class="ctrs" x="80" y="93">건</text></svg><ul class="clist"><li><span class="dot c1"></span><span class="cn">닭갈비</span><b>68.7%</b><em>4,025건</em></li>
+<li><span class="dot c2"></span><span class="cn">낙곱새</span><b>18.3%</b><em>1,070건</em></li>
+<li><span class="dot c3"></span><span class="cn">볶음류</span><b>5.5%</b><em>324건</em></li>
+<li><span class="dot c5"></span><span class="cn">기타</span><b>7.5%</b><em>441건</em></li></ul></div>
+<div class="storeblock catblock"><div class="bh"><h3>하남</h3><span class="btot">5,651<i>건</i></span></div><svg class="donut" viewBox="0 0 160 160" role="img" aria-label="카테고리별 비율"><g transform="rotate(-90 80 80)"><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c1)" stroke-dasharray="347.799 16.626" stroke-dashoffset="-0.000"></circle><circle class="seg" r="58" cx="80" cy="80" stroke="var(--c3)" stroke-dasharray="13.426 350.999" stroke-dashoffset="-349.399"></circle></g><text class="pct" x="87.49" y="141.01">96%</text><text class="ctr" x="80" y="78">5,651</text><text class="ctrs" x="80" y="93">건</text></svg><ul class="clist"><li><span class="dot c1"></span><span class="cn">닭갈비</span><b>95.9%</b><em>5,418건</em></li>
+<li><span class="dot c3"></span><span class="cn">볶음류</span><b>4.1%</b><em>233건</em></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>매장마다 무엇이 다른가</h2>
+      <span class="count">메뉴 16개</span>
+    </div>
+    <p class="note">가운뎃점은 그 매장에서 팔지 않는 메뉴입니다.</p>
+    <div class="tablewrap matrix">
+      <table>
+        <thead><tr><th>메뉴</th><th class="n">압구정</th><th class="n">잠실</th><th class="n">하남</th><th class="n">합계</th></tr></thead>
+        <tbody>
+<tr><td class="nm">치즈닭갈비</td><td class="n off">&#183;</td><td class="n">1,883</td><td class="n">2,359</td><td class="n sum">4,242</td></tr>
+<tr><td class="nm">투움바치즈닭갈비</td><td class="n off">&#183;</td><td class="n">1,347</td><td class="n">1,688</td><td class="n sum">3,035</td></tr>
+<tr><td class="nm">차돌낙곱새</td><td class="n">2,027</td><td class="n">490</td><td class="n off">&#183;</td><td class="n sum">2,517</td></tr>
+<tr><td class="nm">낙곱새</td><td class="n">1,650</td><td class="n">468</td><td class="n off">&#183;</td><td class="n sum">2,118</td></tr>
+<tr><td class="nm">치즈낙지닭갈비</td><td class="n off">&#183;</td><td class="n">401</td><td class="n">711</td><td class="n sum">1,112</td></tr>
+<tr><td class="nm">투움바치즈낙지닭갈비</td><td class="n off">&#183;</td><td class="n">394</td><td class="n">660</td><td class="n sum">1,054</td></tr>
+<tr><td class="nm">낙지비빔밥</td><td class="n">786</td><td class="n off">&#183;</td><td class="n off">&#183;</td><td class="n sum">786</td></tr>
+<tr><td class="nm">철판치즈차돌낙지볶음</td><td class="n">669</td><td class="n">55</td><td class="n">30</td><td class="n sum">754</td></tr>
+<tr><td class="nm">철판낙지볶음</td><td class="n">342</td><td class="n">128</td><td class="n">96</td><td class="n sum">566</td></tr>
+<tr><td class="nm">철판치즈낙지볶음</td><td class="n">422</td><td class="n">33</td><td class="n">73</td><td class="n sum">528</td></tr>
+<tr><td class="nm">낙차새</td><td class="n">349</td><td class="n">112</td><td class="n off">&#183;</td><td class="n sum">461</td></tr>
+<tr><td class="nm">낙지볶음한상</td><td class="n off">&#183;</td><td class="n">441</td><td class="n off">&#183;</td><td class="n sum">441</td></tr>
+<tr><td class="nm">육회비빔밥</td><td class="n">371</td><td class="n off">&#183;</td><td class="n off">&#183;</td><td class="n sum">371</td></tr>
+<tr><td class="nm">철판차돌낙지볶음</td><td class="n">202</td><td class="n">108</td><td class="n">34</td><td class="n sum">344</td></tr>
+<tr><td class="nm">한우육회</td><td class="n">262</td><td class="n off">&#183;</td><td class="n off">&#183;</td><td class="n sum">262</td></tr>
+<tr><td class="nm">오곱새</td><td class="n">194</td><td class="n off">&#183;</td><td class="n off">&#183;</td><td class="n sum">194</td></tr>
+        </tbody>
+        <tfoot><tr><td>합계</td><td class="n">7,274</td><td class="n">5,860</td><td class="n">5,651</td><td class="n">18,785</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    원본 · <code>OneDrive \ 마케팅 \ 월별 판매량 \ 26년 \ 지강_8월_종합.xlsx</code>의 &#12300;종합&#12301; 탭<br>
+    세트로 팔린 것은 인분으로 환산했습니다. 이번 달은 배수를 짐작해야 했던 항목이 없습니다.<br>
+    만든 날 2026-09-02 &#183; 엑셀 파일은 그대로 두고 내용만 옮겼습니다
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>무탄 8월 판매량</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style>
+</head>
+<body>
+<style>
+:root{
+  --paper:#FAF8F3; --surface:#FFFFFF; --ink:#1B1A15; --soft:#6E695C;
+  --faint:#96907F; --rule:#E5E0D3; --hair:#EFEBE0;
+  --jade:#2F6F5E; --brick:#A6412F; --gold:#8A6B22;
+  --c1:#2F6F5E; --c2:#8A6B22; --c3:#A6412F;
+  --c4:#3F6B84; --c5:#6B4A63; --c6:#6E7A3A;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141310; --surface:#1B1A16; --ink:#EDE9DD; --soft:#A9A292;
+    --faint:#7C7666; --rule:#2E2C24; --hair:#26241E;
+    --jade:#79C4AC; --brick:#E08A76; --gold:#D3AC57;
+    --c1:#79C4AC; --c2:#D3AC57; --c3:#E08A76;
+    --c4:#8FB9D4; --c5:#C09ABA; --c6:#B6C57C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141310; --surface:#1B1A16; --ink:#EDE9DD; --soft:#A9A292;
+  --faint:#7C7666; --rule:#2E2C24; --hair:#26241E;
+  --jade:#79C4AC; --brick:#E08A76; --gold:#D3AC57;
+  --c1:#79C4AC; --c2:#D3AC57; --c3:#E08A76;
+  --c4:#8FB9D4; --c5:#C09ABA; --c6:#B6C57C;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+  font-size:15px; line-height:1.6; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:940px; margin:0 auto; padding:34px 20px 72px}
+
+header{border-bottom:2px solid var(--ink); padding-bottom:14px}
+.eyebrow{
+  font-size:11px; letter-spacing:.16em; color:var(--jade);
+  font-weight:600; margin:0 0 6px;
+}
+h1{
+  font-family:"Gowun Batang",serif; font-weight:700;
+  font-size:clamp(28px,6vw,40px); line-height:1.15; margin:0;
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.sub{color:var(--soft); font-size:13px; margin:8px 0 0}
+
+.totals{
+  display:flex; flex-wrap:wrap; gap:4px 26px;
+  border-bottom:1px solid var(--rule); padding:14px 0; margin:0;
+}
+.totals div{display:flex; align-items:baseline; gap:7px}
+.totals dt{font-size:12px; color:var(--soft); margin:0}
+.totals dd{
+  margin:0; font-family:"IBM Plex Mono",monospace; font-weight:500;
+  font-size:16px; font-variant-numeric:tabular-nums;
+}
+.totals dd i{font-style:normal; font-size:11px; color:var(--faint); margin-left:2px}
+
+section{margin-top:40px}
+.sechead{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+h2{
+  font-family:"Gowun Batang",serif; font-weight:700; font-size:21px;
+  margin:0; letter-spacing:-.01em;
+}
+.note{font-size:12px; color:var(--faint); margin:6px 0 0}
+.count{font-size:12px; color:var(--soft); font-family:"IBM Plex Mono",monospace;
+  white-space:nowrap}
+
+.tablewrap{overflow-x:auto; margin-top:12px}
+table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+th{
+  font-size:11px; font-weight:600; color:var(--soft); text-align:left;
+  letter-spacing:.06em; padding:0 8px 7px; border-bottom:1.5px solid var(--ink);
+  white-space:nowrap;
+}
+td{padding:7px 8px; border-bottom:1px solid var(--hair); vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+th.n,td.n,th.r,td.r,th.c,td.c,th.p,td.p{text-align:right}
+td.r{width:34px; padding-right:2px}
+.rk{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--soft)}
+tbody tr:nth-child(-n+3) .rk{color:var(--ink); font-weight:500}
+td.nm{font-size:14px; line-height:1.35; word-break:keep-all}
+td.n{
+  font-family:"IBM Plex Mono",monospace; font-size:13.5px;
+  white-space:nowrap; width:66px;
+}
+td.p{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--soft); width:52px}
+td.c{width:52px; padding-left:0}
+.chg{font-size:11px; font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+.chg.up{color:var(--jade)}
+.chg.down{color:var(--brick)}
+.chg.same{color:var(--faint)}
+.chg.new{color:var(--gold); font-size:10px}
+.donutwrap{
+  display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-top:14px;
+}
+.donut{width:190px; height:190px; flex:none}
+.donut .seg{fill:none; stroke-width:24}
+.donut .pct{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:500;
+  fill:var(--paper); text-anchor:middle;
+}
+.donut .ctr{
+  font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:500;
+  fill:var(--ink); text-anchor:middle;
+}
+.donut .ctrs{font-size:10px; fill:var(--faint); text-anchor:middle;
+  letter-spacing:.08em}
+.donutwrap .tablewrap{flex:1; min-width:230px; margin-top:0}
+.dot{
+  flex:none; width:9px; height:9px; border-radius:2px;
+  display:inline-block; margin-right:7px; vertical-align:1px;
+}
+.dot.c1{background:var(--c1)} .dot.c2{background:var(--c2)}
+.dot.c3{background:var(--c3)} .dot.c4{background:var(--c4)}
+.dot.c5{background:var(--c5)} .dot.c6{background:var(--c6)}
+
+.stores{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:0 26px; margin-top:14px}
+.store{padding:12px 0 14px; border-top:1px solid var(--rule)}
+.sh{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+.sh h4{margin:0; font-size:14px; font-weight:600}
+.tot{font-family:"IBM Plex Mono",monospace; font-size:15px; font-variant-numeric:tabular-nums}
+.tot i{font-style:normal; font-size:10px; color:var(--faint); margin-left:2px}
+.sbar{position:relative; height:7px; background:var(--hair);
+  margin:9px 0 10px; border-radius:1px}
+.sbar span{display:block; height:100%; background:var(--jade);
+  opacity:1; border-radius:1px}
+.sbar span.b{background:var(--gold)}
+.sbar .lbl{
+  position:absolute; right:0; top:-17px; font-size:11px; font-weight:500;
+  color:var(--gold); font-family:"IBM Plex Mono",monospace;
+}
+.sbar.stack{display:flex; overflow:hidden}
+.sbar.stack i{display:block; height:100%}
+.sbar.stack i.a{background:var(--jade)}
+.sbar.stack i.b{background:var(--gold)}
+.store ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:3px}
+.store li{display:flex; align-items:baseline; gap:7px;
+  font-size:13px; color:var(--soft)}
+.store li > span:not(.dot){flex:1; min-width:0; word-break:keep-all}
+.store li b{
+  font-family:"IBM Plex Mono",monospace; font-weight:500; color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.store li em{
+  font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+  color:var(--faint); width:32px; text-align:right; font-variant-numeric:tabular-nums;
+}
+.store li.lead b, .store li.lead em{color:var(--gold)}
+.dot.a{background:var(--jade)}
+.dot.b{background:var(--gold)}
+
+footer{
+  margin-top:52px; padding-top:16px; border-top:1px solid var(--rule);
+  font-size:12px; color:var(--faint); line-height:1.8;
+}
+footer code{
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+  color:var(--soft); word-break:break-all;
+}
+
+@media (max-width:520px){
+  .wrap{padding:26px 15px 56px}
+  td.bar{width:20%; min-width:50px}
+  td.nm{font-size:13px}
+  td.n{width:58px; font-size:13px}
+  .totals{gap:4px 18px}
+  .sechead{flex-wrap:wrap; gap:2px 10px}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">2026년 8월 · 무탄 5개 매장</p>
+    <h1>무탄 8월 판매량</h1>
+    <p class="sub">매장에서 팔린 것을 셌습니다. 순위 옆 화살표는 7월과 견준 것입니다.</p>
+  </header>
+
+  <dl class="totals">
+    <div><dt>음식</dt><dd>35,336<i>건</i></dd></div>
+    <div><dt>코스</dt><dd>1,311<i>건</i></dd></div>
+    <div><dt>세트</dt><dd>2,762<i>건</i></dd></div>
+    <div><dt>주류</dt><dd>78,792,800<i>원</i></dd></div>
+  </dl>
+
+  <section>
+    <div class="sechead">
+      <h2>메뉴</h2>
+      <span class="count">49개 · 35,336건</span>
+    </div>
+    <p class="note">코스와 세트 안에 들어간 것은 빼고, 단품으로 팔린 것만 셌습니다.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th class="r">순위</th><th>메뉴</th><th class="c">7월</th>
+          <th class="n">건수</th>
+        </tr></thead>
+        <tbody>
+<tr><td class="r"><span class="rk">1</span></td><td class="nm">스테이크트러플짜장</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">4,922</td></tr>
+<tr><td class="r"><span class="rk">2</span></td><td class="nm">고추유린기</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">3,854</td></tr>
+<tr><td class="r"><span class="rk">3</span></td><td class="nm">[하프]스테이크트러플짜장</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">3,520</td></tr>
+<tr><td class="r"><span class="rk">4</span></td><td class="nm">한우볶음자장면+후라이</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">3,014</td></tr>
+<tr><td class="r"><span class="rk">5</span></td><td class="nm">[하프]대파차돌짬뽕</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">2,452</td></tr>
+<tr><td class="r"><span class="rk">6</span></td><td class="nm">멘보샤</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">1,965</td></tr>
+<tr><td class="r"><span class="rk">7</span></td><td class="nm">대파차돌짬뽕</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">1,605</td></tr>
+<tr><td class="r"><span class="rk">8</span></td><td class="nm">묵은지볶음밥</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">1,437</td></tr>
+<tr><td class="r"><span class="rk">9</span></td><td class="nm">쇠고기탕수육</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">1,411</td></tr>
+<tr><td class="r"><span class="rk">10</span></td><td class="nm">돼지탕수육</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">1,172</td></tr>
+<tr><td class="r"><span class="rk">11</span></td><td class="nm">[x6배]트러플자장면</td><td class="c"><span class="chg down">&#9660;2</span></td><td class="n">974</td></tr>
+<tr><td class="r"><span class="rk">12</span></td><td class="nm">임실치즈투움바볶음짬뽕</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">961</td></tr>
+<tr><td class="r"><span class="rk">13</span></td><td class="nm">철판마파두부+볶음밥</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">689</td></tr>
+<tr><td class="r"><span class="rk">14</span></td><td class="nm">오징어짬뽕</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">634</td></tr>
+<tr><td class="r"><span class="rk">15</span></td><td class="nm">캐비아멘보샤</td><td class="c"><span class="chg up">&#9650;3</span></td><td class="n">507</td></tr>
+<tr><td class="r"><span class="rk">16</span></td><td class="nm">옥수수볶음밥</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">469</td></tr>
+<tr><td class="r"><span class="rk">17</span></td><td class="nm">깐풍기</td><td class="c"><span class="chg up">&#9650;2</span></td><td class="n">452</td></tr>
+<tr><td class="r"><span class="rk">18</span></td><td class="nm">누룽지탕(1인)</td><td class="c"><span class="chg down">&#9660;2</span></td><td class="n">433</td></tr>
+<tr><td class="r"><span class="rk">19</span></td><td class="nm">김짬뽕</td><td class="c"><span class="chg down">&#9660;4</span></td><td class="n">415</td></tr>
+<tr><td class="r"><span class="rk">20</span></td><td class="nm">어니언꿔바로우</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">412</td></tr>
+<tr><td class="r"><span class="rk">21</span></td><td class="nm">양장피</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">372</td></tr>
+<tr><td class="r"><span class="rk">22</span></td><td class="nm">전복누룽지탕(1인)</td><td class="c"><span class="chg up">&#9650;3</span></td><td class="n">364</td></tr>
+<tr><td class="r"><span class="rk">23</span></td><td class="nm">가지깐풍</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">301</td></tr>
+<tr><td class="r"><span class="rk">24</span></td><td class="nm">전가복</td><td class="c"><span class="chg up">&#9650;2</span></td><td class="n">219</td></tr>
+<tr><td class="r"><span class="rk">25</span></td><td class="nm">칠리새우</td><td class="c"><span class="chg up">&#9650;4</span></td><td class="n">215</td></tr>
+<tr><td class="r"><span class="rk">26</span></td><td class="nm">소롱포(4P)</td><td class="c"><span class="chg down">&#9660;2</span></td><td class="n">208</td></tr>
+<tr><td class="r"><span class="rk">27</span></td><td class="nm">깐풍육</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">180</td></tr>
+<tr><td class="r"><span class="rk">28</span></td><td class="nm">딤섬3종(하/소/부)</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">171</td></tr>
+<tr><td class="r"><span class="rk">29</span></td><td class="nm">전복장육냉채</td><td class="c"><span class="chg up">&#9650;2</span></td><td class="n">167</td></tr>
+<tr><td class="r"><span class="rk">30</span></td><td class="nm">대게살유산슬</td><td class="c"><span class="chg up">&#9650;4</span></td><td class="n">147</td></tr>
+<tr><td class="r"><span class="rk">31</span></td><td class="nm">대파유린기</td><td class="c"><span class="chg up">&#9650;7</span></td><td class="n">145</td></tr>
+<tr><td class="r"><span class="rk">32</span></td><td class="nm">오징어덴뿌라</td><td class="c"><span class="chg up">&#9650;7</span></td><td class="n">138</td></tr>
+<tr><td class="r"><span class="rk">33</span></td><td class="nm">묵은지소롱포(4P)</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">136</td></tr>
+<tr><td class="r"><span class="rk">34</span></td><td class="nm">누룽지탕</td><td class="c"><span class="chg up">&#9650;6</span></td><td class="n">129</td></tr>
+<tr><td class="r"><span class="rk">35</span></td><td class="nm">영덕게살하가우(2P)</td><td class="c"><span class="chg down">&#9660;5</span></td><td class="n">123</td></tr>
+<tr><td class="r"><span class="rk">36</span></td><td class="nm">난자완스</td><td class="c"><span class="chg down">&#9660;1</span></td><td class="n">120</td></tr>
+<tr><td class="r"><span class="rk">37</span></td><td class="nm">오이탕탕유린기</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">115</td></tr>
+<tr><td class="r"><span class="rk">38</span></td><td class="nm">하가우(3P)</td><td class="c"><span class="chg down">&#9660;5</span></td><td class="n">113</td></tr>
+<tr><td class="r"><span class="rk">39</span></td><td class="nm">부추새우딤섬(3P)</td><td class="c"><span class="chg up">&#9650;2</span></td><td class="n">109</td></tr>
+<tr><td class="r"><span class="rk">40</span></td><td class="nm">쇼마이(4P)</td><td class="c"><span class="chg down">&#9660;4</span></td><td class="n">86</td></tr>
+<tr><td class="r"><span class="rk">41</span></td><td class="nm">마늘유린기</td><td class="c"><span class="chg up">&#9650;5</span></td><td class="n">77</td></tr>
+<tr><td class="r"><span class="rk">42</span></td><td class="nm">어향동고</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">73</td></tr>
+<tr><td class="r"><span class="rk">43</span></td><td class="nm">비건김치만두(12P)</td><td class="c"><span class="chg up">&#9650;4</span></td><td class="n">72</td></tr>
+<tr><td class="r"><span class="rk">44</span></td><td class="nm">뚝배기마파두부</td><td class="c"><span class="chg same">&#8211;</span></td><td class="n">68</td></tr>
+<tr><td class="r"><span class="rk">45</span></td><td class="nm">비건버섯만두(12P)</td><td class="c"><span class="chg down">&#9660;2</span></td><td class="n">58</td></tr>
+<tr><td class="r"><span class="rk">46</span></td><td class="nm">쇠고기고추잡채</td><td class="c"><span class="chg new">새로</span></td><td class="n">58</td></tr>
+<tr><td class="r"><span class="rk">47</span></td><td class="nm">팔보채</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">41</td></tr>
+<tr><td class="r"><span class="rk">48</span></td><td class="nm">오징어탕수육</td><td class="c"><span class="chg up">&#9650;1</span></td><td class="n">29</td></tr>
+<tr><td class="r"><span class="rk">49</span></td><td class="nm">상어지느러미찜</td><td class="c"><span class="chg up">&#9650;2</span></td><td class="n">4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>코스</h2>
+      <span class="count">4개 매장 · 1,311건</span>
+    </div>
+    <p class="note">파주점은 코스를 팔지 않습니다. 막대는 두 코스가 그 매장에서 몇 할씩인지입니다 — 노랑이 베스트셀러, 초록이 비즈니스.</p>
+    <div class="stores">
+<div class="store"><div class="sh"><h4>압구정</h4><span class="tot">214<i>건</i></span></div><div class="sbar stack"><i class="b" style="width:98.13%"></i><i class="a" style="width:1.87%"></i></div><ul><li><span class="dot b"></span><span>베스트셀러코스</span><b>210</b><em>98%</em></li>
+<li><span class="dot a"></span><span>비즈니스코스</span><b>4</b><em>2%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>코엑스</h4><span class="tot">406<i>건</i></span></div><div class="sbar stack"><i class="b" style="width:99.01%"></i><i class="a" style="width:0.99%"></i></div><ul><li><span class="dot b"></span><span>베스트셀러코스</span><b>402</b><em>99%</em></li>
+<li><span class="dot a"></span><span>비즈니스코스</span><b>4</b><em>1%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>광화문</h4><span class="tot">345<i>건</i></span></div><div class="sbar stack"><i class="b" style="width:97.10%"></i><i class="a" style="width:2.90%"></i></div><ul><li><span class="dot b"></span><span>베스트셀러코스</span><b>335</b><em>97%</em></li>
+<li><span class="dot a"></span><span>비즈니스코스</span><b>10</b><em>3%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>여의도</h4><span class="tot">346<i>건</i></span></div><div class="sbar stack"><i class="b" style="width:73.99%"></i><i class="a" style="width:26.01%"></i></div><ul><li><span class="dot b"></span><span>베스트셀러코스</span><b>256</b><em>74%</em></li>
+<li><span class="dot a"></span><span>비즈니스코스</span><b>90</b><em>26%</em></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>세트</h2>
+      <span class="count">5개 매장 · 2,762건</span>
+    </div>
+    <p class="note">막대는 그 매장 세트 중 요리(하프)3종세트가 몇 할인지입니다.</p>
+    <div class="stores">
+<div class="store"><div class="sh"><h4>압구정</h4><span class="tot">410<i>건</i></span></div><div class="sbar"><span class="b" style="width:47.07%"></span><b class="lbl">47%</b></div><ul><li class="lead"><span>요리(하프)3종세트</span><b>193</b><em>47%</em></li>
+<li><span>커플시그니처A세트</span><b>86</b><em>21%</em></li>
+<li><span>무탄시그니처세트</span><b>71</b><em>17%</em></li>
+<li><span>비밀이야시그니처세트</span><b>59</b><em>14%</em></li>
+<li><span>프리미엄 와인 세트(레드)</span><b>1</b><em>0%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>코엑스</h4><span class="tot">827<i>건</i></span></div><div class="sbar"><span class="b" style="width:53.33%"></span><b class="lbl">53%</b></div><ul><li class="lead"><span>요리(하프)3종세트</span><b>441</b><em>53%</em></li>
+<li><span>커플시그니처A세트</span><b>191</b><em>23%</em></li>
+<li><span>무탄시그니처세트</span><b>132</b><em>16%</em></li>
+<li><span>비밀이야시그니처세트</span><b>63</b><em>8%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>광화문</h4><span class="tot">424<i>건</i></span></div><div class="sbar"><span class="b" style="width:69.81%"></span><b class="lbl">70%</b></div><ul><li class="lead"><span>요리(하프)3종세트</span><b>296</b><em>70%</em></li>
+<li><span>커플시그니처A세트</span><b>56</b><em>13%</em></li>
+<li><span>무탄시그니처세트</span><b>56</b><em>13%</em></li>
+<li><span>비밀이야시그니처세트</span><b>16</b><em>4%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>여의도</h4><span class="tot">647<i>건</i></span></div><div class="sbar"><span class="b" style="width:62.91%"></span><b class="lbl">63%</b></div><ul><li class="lead"><span>요리(하프)3종세트</span><b>407</b><em>63%</em></li>
+<li><span>무탄시그니처세트</span><b>109</b><em>17%</em></li>
+<li><span>커플시그니처A세트</span><b>77</b><em>12%</em></li>
+<li><span>비밀이야시그니처세트</span><b>54</b><em>8%</em></li></ul></div>
+<div class="store"><div class="sh"><h4>파주</h4><span class="tot">454<i>건</i></span></div><div class="sbar"><span class="b" style="width:90.53%"></span><b class="lbl">91%</b></div><ul><li class="lead"><span>요리(하프)3종세트</span><b>411</b><em>91%</em></li>
+<li><span>비밀이야시그니처세트</span><b>43</b><em>9%</em></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>주류</h2>
+      <span class="count">78,792,800원</span>
+    </div>
+    <p class="note">건수가 아니라 매출입니다. 생맥주가 셋 중 하나가 넘습니다.</p>
+    <div class="donutwrap">
+<svg class="donut" viewBox="0 0 160 160" role="img" aria-label="주류 품목별 매출 비율"><g transform="rotate(-90 80 80)"><circle class="seg" r="60" cx="80" cy="80" stroke="var(--c1)" stroke-dasharray="133.302 243.689" stroke-dashoffset="-0.000"></circle>
+<circle class="seg" r="60" cx="80" cy="80" stroke="var(--c2)" stroke-dasharray="110.890 266.101" stroke-dashoffset="-134.902"></circle>
+<circle class="seg" r="60" cx="80" cy="80" stroke="var(--c3)" stroke-dasharray="81.245 295.746" stroke-dashoffset="-247.392"></circle>
+<circle class="seg" r="60" cx="80" cy="80" stroke="var(--c4)" stroke-dasharray="29.782 347.209" stroke-dashoffset="-330.238"></circle>
+<circle class="seg" r="60" cx="80" cy="80" stroke="var(--c5)" stroke-dasharray="10.256 366.735" stroke-dashoffset="-361.620"></circle>
+<circle class="seg" r="60" cx="80" cy="80" stroke="var(--c6)" stroke-dasharray="1.915 375.076" stroke-dashoffset="-373.476"></circle></g><text class="pct" x="134.11" y="57.59">36%</text>
+<text class="pct" x="77.35" y="143.44">30%</text>
+<text class="pct" x="20.31" y="77.44">22%</text>
+<text class="pct" x="50.31" y="31.36">8%</text><text class="ctr" x="80" y="76">7,879</text><text class="ctrs" x="80" y="92">만원</text></svg>
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th>품목</th><th class="n">매출</th><th class="p">비율</th>
+          </tr></thead>
+          <tbody>
+<tr><td class="nm"><span class="dot c1"></span>생맥주</td><td class="n">28,195,100</td><td class="p">35.8%</td></tr>
+<tr><td class="nm"><span class="dot c2"></span>중국 주류</td><td class="n">23,511,000</td><td class="p">29.8%</td></tr>
+<tr><td class="nm"><span class="dot c3"></span>맥주,소주</td><td class="n">17,315,000</td><td class="p">22.0%</td></tr>
+<tr><td class="nm"><span class="dot c4"></span>와인</td><td class="n">6,559,000</td><td class="p">8.3%</td></tr>
+<tr><td class="nm"><span class="dot c5"></span>기타 (화요,위스키)</td><td class="n">2,478,000</td><td class="p">3.1%</td></tr>
+<tr><td class="nm"><span class="dot c6"></span>하이볼</td><td class="n">734,700</td><td class="p">0.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    원본 · <code>OneDrive \ 마케팅 \ 월별 판매량 \ 26년 \ 무탄_8월_메뉴출력.xlsx</code>의 &#12300;메뉴(출력)&#12301;&#183;&#12300;기타(출력)&#12301; 탭<br>
+    만든 날 2026-09-02 &#183; 엑셀 파일은 그대로 두고 내용만 옮겼습니다
+  </footer>
+</div>
+</body>
+</html>
