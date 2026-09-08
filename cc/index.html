@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>남들은 뭘 만들었나</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+:root{
+  --ground:#EAECEE; --surface:#FFFFFF; --surface-2:#F2F4F5;
+  --ink:#1A1F26; --ink-2:#4C5762; --muted:#8B959E;
+  --line:#D2D7DB; --line-strong:#B6BEC4;
+  --pass:#0F5F52; --stale:#A0451C; --stale-soft:#F1E1D9;
+  --f-display:"Noto Serif KR",Georgia,serif;
+  --f-body:"IBM Plex Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#14181C; --surface:#1B2026; --surface-2:#232931;
+    --ink:#E7EBEE; --ink-2:#AFB9C3; --muted:#78838D;
+    --line:#303841; --line-strong:#47525C;
+    --pass:#55C4AA; --stale:#DD8459; --stale-soft:#33211A;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--f-body);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%}
+.page{max-width:42rem;margin:0 auto;padding:3rem 1.25rem 4.5rem;
+  display:flex;flex-direction:column;gap:2.6rem}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:900;
+  font-size:clamp(2.2rem,9vw,3.2rem);line-height:1.08;letter-spacing:-.02em;
+  margin:.55rem 0 0;text-wrap:balance}
+.standfirst{font-size:1.04rem;color:var(--ink-2);margin:.8rem 0 0;max-width:36ch}
+.warn{background:var(--stale-soft);border:1px solid var(--stale);
+  padding:1.05rem 1.15rem;display:flex;flex-direction:column;gap:.45rem}
+.warn-tag{font-family:var(--f-mono);font-size:.7rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--stale)}
+.warn p{margin:0;font-size:.95rem;line-height:1.6}
+.group{display:flex;flex-direction:column;gap:.95rem}
+.group-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .8rem;
+  border-bottom:2px solid var(--ink);padding-bottom:.5rem}
+h2{font-family:var(--f-display);font-weight:700;
+  font-size:clamp(1.25rem,4.8vw,1.5rem);line-height:1.3;margin:0;
+  letter-spacing:-.01em}
+.group-n{font-family:var(--f-mono);font-size:.75rem;font-weight:600;
+  color:var(--muted);letter-spacing:.04em}
+.group-why{font-size:.94rem;color:var(--ink-2);margin:0}
+.cards{display:flex;flex-direction:column;gap:.55rem}
+.card{background:var(--surface);border:1px solid var(--line);
+  padding:.95rem 1.05rem;display:flex;flex-direction:column;gap:.3rem}
+.card-name{font-family:var(--f-mono);font-size:.92rem;font-weight:600;
+  color:var(--pass);text-decoration:none;word-break:break-word}
+.card-name:hover{text-decoration:underline}
+.card-name:focus-visible{outline:2px solid var(--pass);outline-offset:3px}
+.card-what{font-size:.94rem;line-height:1.6;margin:0}
+.card-note{font-size:.88rem;line-height:1.55;margin:0;color:var(--ink-2);
+  border-left:2px solid var(--line-strong);padding-left:.7rem}
+.card-note b{color:var(--ink);font-weight:600}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:3px;padding:.05em .3em}
+footer{border-top:1px solid var(--line);padding-top:1.05rem;
+  font-family:var(--f-mono);font-size:.74rem;line-height:1.8;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="eyebrow">2026-09-08 기준 · 25개</div>
+  <h1>남들은 뭘 만들었나</h1>
+  <p class="standfirst">심심할 때 훑는 자리입니다. <b>업무에 안 걸려도 됩니다</b> &mdash; 걸리는 것만 보는 자리는 따로 있습니다.</p>
+</header>
+
+<div class="warn">
+  <div class="warn-tag">읽기 전에</div>
+  <p><b>「이런 게 있다」이지 「깔아도 된다」가 아닙니다.</b> 전부 남이 만든 것이고, 깐다는 건 남의 코드를 내 컴퓨터에서 돌린다는 뜻입니다. <b>직접 써본 것은 하나도 없습니다.</b></p>
+  <p>깔 거면 <b>하나씩</b>, <b>자동화가 도는 시간을 피해서</b>, <b>아무것도 안 만지는 것부터</b>.</p>
+</div>
+
+<section class="group">
+  <div class="group-head"><h2>2026-09-08 · 새로 올라온 것 6개</h2><span class="group-n">6개</span></div>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Agent Skills (Anthropic 공식)</a>
+      <p class="card-what">Claude Code가 그대로 읽는 SKILL.md 형식과 예제 스킬들을 모아둔 공식 저장소.</p>
+      <p class="card-note">이미 <code>.claude/skills/</code>에 스킬을 여럿 굴리고 있으니, 공식 예제를 보면 아침 루틴·카드뉴스 같은 걸 더 깔끔하게 다시 짤 재료가 나온다.</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">Official Plugin Directory</a>
+      <p class="card-what">Claude Code 안에서 바로 설치할 수 있게 추린 공식 플러그인 목록.</p>
+      <p class="card-note">코드를 안 짜도 목록을 훑으며 "이런 것도 되는구나"를 줍기 좋은 자리 — 심심할 때 볼 거리로 딱 맞다.</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum" target="_blank" rel="noopener">Ralph Wiggum Plugin</a>
+      <p class="card-what">같은 작업을 스스로 반복하며 조금씩 나아지게 하는 루프 기법을 Anthropic이 플러그인으로 구현한 것.</p>
+      <p class="card-note">초안을 여러 번 돌려 고쳐 쓰는 방식이라, 블로그 원고나 카드뉴스 문구를 "AI 티 빠질 때까지" 돌리는 데 응용해볼 만하다.</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/Wolfe-Jam/faf-cli" target="_blank" rel="noopener">faf-cli</a>
+      <p class="card-what">폴더 안 실제 내용을 훑어 CLAUDE.md를 자동으로 쓰고 최신 상태로 유지해주는 도구.</p>
+      <p class="card-note">CLAUDE.md가 손으로 계속 불어나는 구조라, 파일과 규칙이 어긋나는 걸 기계가 잡아주는 방식이 어떤 건지 볼 만하다.</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/Zandereins/schliff" target="_blank" rel="noopener">Schliff</a>
+      <p class="card-what">CLAUDE.md·SKILL.md 같은 지시문 파일이 얼마나 잘 쓰였는지 8개 항목으로 점수를 매기는 채점기.</p>
+      <p class="card-note">"내 CLAUDE.md가 잘 쓴 건가"를 처음으로 남의 기준으로 확인해볼 수 있고, 설치 부담이 없다.</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/anneschuth/claude-threads" target="_blank" rel="noopener">Claude Threads</a>
+      <p class="card-what">내 PC에서 도는 Claude Code 세션을 슬랙/매터모스트 스레드에 실시간으로 흘려보내 거기서 보고 답하게 하는 것.</p>
+      <p class="card-note">텔레그램 알림·<code>/remote-control</code>로 폰에서 잇는 지금 방식의 다른 판본이라, 밖에서 세션을 붙잡는 길을 하나 더 보는 셈이다.</p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>마크다운 노트를 AI가 스스로 정리하게</h2><span class="group-n">4개</span></div>
+  <p class="group-why">이 워크스페이스가 통째로 마크다운 파일 뭉치라 남 얘기가 아니다. 다만 넷 다 <b>Obsidian 볼트</b>를 전제로 하고, 여기는 Obsidian을 안 쓴다 — 폴더 구조는 같으니 붙을지 안 붙을지는 열어봐야 안다.</p>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/ccf/agentcairn" target="_blank" rel="noopener">agentcairn</a>
+      <p class="card-what">볼트를 프로젝트 넘나드는 장기 기억으로 쓴다. 별도 DB 없이 파일만 쓴다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/AgriciDaniel/claude-obsidian" target="_blank" rel="noopener">claude-obsidian</a>
+      <p class="card-what">아무 소스나 읽어 서로 링크를 걸고 하나의 지식 그래프로 정리한다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/iurykrieger/claude-bedrock" target="_blank" rel="noopener">Bedrock</a>
+      <p class="card-what">스킬 8개로 사람·팀·주제를 유형별로 갈라 제텔카스텐을 만든다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/ngmeyer/librarian-mcp" target="_blank" rel="noopener">Librarian</a>
+      <p class="card-what"><code>.md</code> 폴더에 검색과 자동 위키링크를 붙이는 MCP 서버</p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>폰에서 부리기</h2><span class="group-n">1개</span></div>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/Imolatte/tg-claude" target="_blank" rel="noopener">tg-claude</a>
+      <p class="card-what"><b>텔레그램 봇으로 내 PC의 Claude Code를 폰에서 조종한다.</b> 진행 상황 스트리밍·음성 입력·git 패널. 이미 알림용으로 텔레그램을 쓰고 있어서 통로가 겹친다</p>
+      <p class="card-note">다만 <code>/remote-control</code>이 이미 되고 2026-08-29에 폰으로 이어받는 걸 확인했다. <b>겹치는 걸 왜 깔지</b>부터 답이 나와야 한다</p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>글과 이름</h2><span class="group-n">2개</span></div>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/conorbronsdon/avoid-ai-writing" target="_blank" rel="noopener">Avoid AI Writing</a>
+      <p class="card-what">AI 티 나는 문장을 찾아 고친다. 패턴 49가지 이상. <b>카드뉴스·블로그 원고 검수에 바로 붙는다</b> — <code>brand-guardian</code>이 하는 일과 겹치니 대조해볼 값이 있다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/glacierphonk/naming" target="_blank" rel="noopener">naming</a>
+      <p class="card-what">제품·브랜드 이름을 은유에서 후보까지 단계로 짓는다. <b>푸드뉴스가 계정 이름에서 막혀 있다</b></p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>디자인</h2><span class="group-n">5개</span></div>
+  <p class="group-why">2026-09-01부터 디자인에 힘을 싣기로 한 것과 같은 갈래다. [[디자인-기준-붙이기]]가 원본.</p>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/bitjaru/styleseed" target="_blank" rel="noopener">StyleSeed</a>
+      <p class="card-what">토큰을 더 먹이는 대신 <b>판단 규칙 74가지</b>를 가르친다. 「프로가 아는데 안 적는 것」</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/educlopez/ui-craft" target="_blank" rel="noopener">UI Craft</a>
+      <p class="card-what">렌즈 22개로 나눠 디자인 감각을 붙인다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/cathrynlavery/diagram-design" target="_blank" rel="noopener">Diagram Design</a>
+      <p class="card-what">편집 디자인 느낌의 다이어그램을 뽑는다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/rixinhahaha/snip" target="_blank" rel="noopener">Snip</a>
+      <p class="card-what">말로 설명하는 대신 <b>그림·HTML로 보여주고 고르게</b> 한다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/nicobailon/visual-explainer" target="_blank" rel="noopener">visual-explainer</a>
+      <p class="card-what">터미널 출력을 HTML 페이지·슬라이드로 바꾼다</p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>영상</h2><span class="group-n">3개</span></div>
+  <p class="group-why">[[클로드코드-쓸-거리]]가 아니라 여기 있는 이유는, <b>AI 영상은 「언젠가」로 미뤄둔 갈래</b>라서다.</p>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/iart-ai/motion-skills" target="_blank" rel="noopener">motion-skills</a>
+      <p class="card-what">모션그래픽·영상 스킬 약 50개를 14묶음으로. 키네틱 타이포, 데이터 차트</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/Alisa0808/vox-director" target="_blank" rel="noopener">Vox director</a>
+      <p class="card-what">한 줄 주제로 Vox식 종이콜라주 설명 영상이나 광고를 뽑는다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/renezander030/capcut-cli" target="_blank" rel="noopener">capcut-cli</a>
+      <p class="card-what"><b>캡컷 프로젝트를 코드로 편집한다.</b> 타임라인을 만들고 넣는다</p>
+    </div>
+  </div>
+</section>
+<section class="group">
+  <div class="group-head"><h2>그 밖</h2><span class="group-n">4개</span></div>
+  <div class="cards">
+    <div class="card">
+      <a class="card-name" href="https://github.com/es617/claude-replay" target="_blank" rel="noopener">claude-replay</a>
+      <p class="card-what">세션 기록을 <b>재생 가능한 HTML로</b> 바꾼다. 남에게 「이렇게 돌아간다」를 보여줄 때</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/SawyerHood/dev-browser" target="_blank" rel="noopener">Dev Browser</a>
+      <p class="card-what">Claude가 브라우저를 몰아 자기 작업을 눈으로 검증한다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://github.com/Li-Evan/Bloom" target="_blank" rel="noopener">Bloom</a>
+      <p class="card-what">블룸의 「2시그마」 연구를 개인 과외 스킬로. 강의계획을 만들고 가르치고 시험 본다</p>
+    </div>
+    <div class="card">
+      <a class="card-name" href="https://nikiforovall.blog/claude-code-rules/" target="_blank" rel="noopener">Claude Code Handbook</a>
+      <p class="card-what">실무 요령 모음. 설치가 아니라 읽는 것</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  출처 awesome-claude-code &middot; anthropics/claude-cookbooks<br>
+  주소는 원본 목록과 대조해 확인 &middot; 직접 써본 것은 없음<br>
+  2026-09-08 갱신 &middot; 토요일마다 새로 올라온 것이 붙습니다
+</footer>
+
+</div>
+</body>
+</html>
